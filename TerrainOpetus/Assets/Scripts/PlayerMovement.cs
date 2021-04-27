@@ -73,14 +73,15 @@ public class PlayerMovement : MonoBehaviour
 
         //L‰hetet‰‰n laatikkomallinen "s‰de" kameran keskelt‰
         //et‰isyydelle 3. Regoidaan vain collidereihin, joilla Layer on Pickable
-        bool isHit = Physics.BoxCast(cam.position, new Vector3(1, 1, 1), 
-            cam.forward, out hit , cam.rotation, 3, LayerMask.GetMask("Pickable"));
+        bool isHit = Physics.BoxCast(transform.position, new Vector3(1, 1, 1), 
+            transform.forward, out hit , transform.rotation, 3, LayerMask.GetMask("Pickable"));
 
         if(isHit)
         {
             pickupItem = hit.transform;
             pickupItem.GetComponent<Rigidbody>().isKinematic = true;
-            pickupItem.parent = cam.transform;
+            pickupItem.parent = transform;
+            pickupItem.localPosition = new Vector3(0, 0, 1.5f);
 
             pickupItem.GetComponent<Renderer>().material.color = Color.yellow;
         }

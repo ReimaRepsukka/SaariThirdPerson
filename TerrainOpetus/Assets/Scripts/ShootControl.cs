@@ -29,18 +29,16 @@ public class ShootControl : MonoBehaviour
         //Onko painettu shoot-nappia
         if (pia.Land.Shoot.triggered && bullets > 0)
         {
-            //Haetaan ampumiseen sijainti kameran edestä
-            Vector3 shootPos = Camera.main.transform.position
-                + Camera.main.transform.forward * 0.5f;
+            //Haetaan ampumiseen sijainti pelaajan läheltä
+            Vector3 shootPos = transform.position
+                + transform.forward * 0.5f;
 
-            //Aampumissuunta kameran forward suuntaan
-            Vector3 shootDirection = Camera.main.transform.forward;
 
             //Luodaan ammus valittuun kohtaan.
             GameObject ammo = Instantiate(ammoPrefab, shootPos, Quaternion.identity);
 
             //Asetetaan ammukselle lähtövoima
-            ammo.GetComponent<Rigidbody>().AddForce(shootDirection * forceMultiplier);
+            ammo.GetComponent<Rigidbody>().AddForce(transform.forward * forceMultiplier);
            
             //Päivitetään ammusten määrä
             bullets--;
